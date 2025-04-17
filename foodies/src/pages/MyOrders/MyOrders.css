@@ -1,0 +1,130 @@
+.table td {
+    vertical-align: middle;
+}
+
+.my-orders-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.my-orders-container h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.no-orders {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 2rem;
+}
+
+.orders-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.order-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.order-id {
+  font-weight: bold;
+  color: #333;
+}
+
+.order-status {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+  position: relative;
+}
+
+/* Pulsing glow animation */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 20px currentColor;
+  }
+  100% {
+    box-shadow: 0 0 5px currentColor;
+  }
+}
+
+.status-preparing {
+  background-color: #fff3cd;
+  color: #856404;
+  animation: pulse-glow 2s infinite;
+}
+
+.status-delivering {
+  background-color: #cce5ff;
+  color: #004085;
+  animation: pulse-glow 2s infinite;
+}
+
+.status-delivered {
+  background-color: #d4edda;
+  color: #155724;
+  /* No animation for delivered status */
+}
+
+.order-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.order-items h4 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.order-items ul {
+  list-style: none;
+  padding: 0;
+}
+
+.order-items li {
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.order-info p {
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.order-info strong {
+  color: #333;
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .order-details {
+    grid-template-columns: 1fr;
+  }
+  
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

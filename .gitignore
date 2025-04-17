@@ -1,7 +1,0 @@
-node_modules
-# .gitignore
-foodies/.env
-build
-dist
-.DS_Store
-*.log

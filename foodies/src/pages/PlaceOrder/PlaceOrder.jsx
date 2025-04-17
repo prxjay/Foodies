@@ -12,37 +12,13 @@ import {
   verifyPayment,
 } from "../../service/orderService";
 import { clearCartItems } from "../../service/cartService";
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-import StripePayment from '../../components/StripePayment/StripePayment';
 import Swal from 'sweetalert2';
-
-const stripePromise = loadStripe('pk_test_51R8FnyH4Hfp4qbVG0pSRuNKr9hkfXp5j3hw44zVEzVgtYlNZjZO6lEzGkTyPsvr1AJ4dqf8KbRGmNdUqIjHV5HIj00S2iigSuA');
 
 const PlaceOrder = () => {
   const { foodList, quantities, setQuantities, token } =
     useContext(StoreContext);
   const navigate = useNavigate();
   const [paymentMethod, setPaymentMethod] = useState('cod');
-  const [stripeLoaded, setStripeLoaded] = useState(false);
-
-  useEffect(() => {
-    // Load Stripe asynchronously
-    const loadStripe = async () => {
-      try {
-        const stripeModule = await import('@stripe/stripe-js');
-        const stripe = await stripeModule.loadStripe('pk_test_51R8FnyH4Hfp4qbVG0pSRuNKr9hkfXp5j3hw44zVEzVgtYlNZjZO6lEzGkTyPsvr1AJ4dqf8KbRGmNdUqIjHV5HIj00S2iigSuA');
-        setStripeLoaded(true);
-      } catch (error) {
-        console.error('Error loading Stripe:', error);
-        toast.error('Payment system is currently unavailable. Please try again later.');
-      }
-    };
-
-    if (paymentMethod === 'stripe') {
-      loadStripe();
-    }
-  }, [paymentMethod]);
 
   const [data, setData] = useState({
     name: "",
@@ -81,43 +57,6 @@ const PlaceOrder = () => {
     }
 
     return true;
-  };
-
-  const handleStripePayment = async (orderId) => {
-    try {
-      const stripeModule = await import('@stripe/stripe-js');
-      const stripe = await stripeModule.loadStripe('pk_test_51R8FnyH4Hfp4qbVG0pSRuNKr9hkfXp5j3hw44zVEzVgtYlNZjZO6lEzGkTyPsvr1AJ4dqf8KbRGmNdUqIjHV5HIj00S2iigSuA');
-      
-      // Create a checkout session on your server
-      const response = await fetch('http://localhost:8080/api/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          orderId,
-          amount: orderData.amount,
-          currency: 'inr',
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to create checkout session');
-      }
-
-      const { sessionId } = await response.json();
-
-      const { error } = await stripe.redirectToCheckout({
-        sessionId: sessionId,
-      });
-
-      if (error) {
-        toast.error(error.message);
-      }
-    } catch (error) {
-      console.error('Stripe payment error:', error);
-      toast.error('Payment system is currently unavailable. Please try again later.');
-    }
   };
 
   const onSubmitHandler = async (event) => {
@@ -179,8 +118,6 @@ const PlaceOrder = () => {
           });
           await clearCartItems(token);
           setQuantities({});
-        } else {
-          await handleStripePayment(response.id);
         }
       } else {
         toast.error('Unable to place order. Please try again.');
@@ -241,41 +178,6 @@ const PlaceOrder = () => {
     } catch (error) {
       toast.error("Something went wrong. Contact support.");
     }
-  };
-
-  const handlePaymentSuccess = async (paymentIntent) => {
-    try {
-      const orderedItems = foodList
-        .filter((food) => quantities[food.id] > 0)
-        .map((food) => ({
-          foodId: food.id,
-          quantity: quantities[food.id],
-          price: food.price,
-          name: food.name,
-          category: food.category,
-          imageUrl: food.imageUrl,
-          description: food.description,
-        }));
-
-      const orderData = {
-        ...data,
-        orderedItems,
-        amount: calculateCartTotals(foodList.filter(food => quantities[food.id] > 0), quantities).total,
-        paymentMethod: 'card',
-        paymentStatus: 'paid',
-      };
-
-      await createOrder(orderData, token);
-      toast.success('Order placed successfully!');
-      navigate('/myorders');
-    } catch (error) {
-      toast.error('Failed to place order. Please try again.');
-      console.error('Error placing order:', error);
-    }
-  };
-
-  const handlePaymentError = (error) => {
-    console.error('Payment error:', error);
   };
 
   return (
@@ -400,21 +302,6 @@ const PlaceOrder = () => {
                   />
                   <label className="form-check-label" htmlFor="cod">
                     Cash on Delivery
-                  </label>
-                </div>
-              </div>
-              <div className="border rounded p-2 mb-2 position-relative">
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="paymentMethod"
-                    id="stripe"
-                    value="stripe"
-                    disabled
-                  />
-                  <label className="form-check-label text-muted" htmlFor="stripe">
-                    Stripe <span className="badge bg-secondary ms-2">currently unavailable</span>
                   </label>
                 </div>
               </div>

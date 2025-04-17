@@ -1,6 +1,7 @@
-     node_modules
-     .env
-     build
-     dist
-     .DS_Store
-     *.log
+node_modules
+# .gitignore
+foodies/.env
+build
+dist
+.DS_Store
+*.log

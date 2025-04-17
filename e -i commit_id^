@@ -1,0 +1,29 @@
+[33mcommit b44c6566b13c363356ac45060e837f2d5ea25a1f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Prawin <prawinkrk@gmail.com>
+Date:   Thu Apr 17 14:09:56 2025 +0530
+
+    Fully removed submodule configuration
+
+[33mcommit 0d2119b121d3e16216b5fa8e29f42a3b2d1b4589[m
+Author: Prawin <prawinkrk@gmail.com>
+Date:   Thu Apr 17 14:09:41 2025 +0530
+
+    Removed submodules from .gitmodules
+
+[33mcommit c4e1a503c97b39571b9760992a111b80c675f07f[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Prawin <prawinkrk@gmail.com>
+Date:   Thu Apr 17 14:06:32 2025 +0530
+
+    Removed .git submodules
+
+[33mcommit ce011d5fbeee847ca46f0e7beda80a02a408eb3b[m
+Author: Prawin <prawinkrk@gmail.com>
+Date:   Thu Apr 17 13:56:44 2025 +0530
+
+    Removed embedded git repositories
+
+[33mcommit 33abc27bf92862c1e498e177124497ddc5479dc9[m
+Author: prxjay <prawinkrk@gmail.com>
+Date:   Thu Apr 17 12:59:07 2025 +0530
+
+    Initial commit

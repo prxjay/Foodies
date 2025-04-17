@@ -3,40 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <title>Foodies - Online Food Delivery App</title>
-    <style>
-      #chatbot {
-        display: none; /* Remove this style as the iframe is no longer needed */
-      }
-      #chatbot-icon {
-        display: none; /* Remove this style as the button is no longer needed */
-      }
-    </style>
   </head>
   <body>
     <div id="root"></div>
-    <button id="chatbot-icon" onclick="toggleChatbot()">💬</button>
-    <iframe
-      id="chatbot"
-      src="https://bot.dialogflow.com/8d741cd3-89d5-4157-8c2c-3390a27bbde4">
-    </iframe>
     <script type="module" src="/src/main.jsx"></script>
-    <script>
-      function toggleChatbot() {
-        const chatbot = document.getElementById('chatbot');
-        chatbot.style.display = chatbot.style.display === 'none' ? 'block' : 'none';
-      }
-    </script>
-    <!-- ChatBot.com Widget -->
-    <script>
-      window.__ow = window.__ow || {};
-      window.__ow.organizationId = "0301d038-8fe4-4477-9a35-f739280462a8";
-      window.__ow.template_id = "1490f795-619b-4563-aaf5-e2fbc3131912";
-      window.__ow.integration_name = "manual_settings";
-      window.__ow.product_name = "chatbot";   
-      ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[OpenWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.openwidget.com/openwidget.js",t.head.appendChild(n)}};!n.__ow.asyncInit&&e.init(),n.OpenWidget=n.OpenWidget||e}(window,document,[].slice))
-    </script>
-    <noscript>You need to <a href="https://www.chatbot.com/help/chat-widget/enable-javascript-in-your-browser/" rel="noopener nofollow">enable JavaScript</a> in order to use the AI chatbot tool powered by <a href="https://www.chatbot.com/" rel="noopener nofollow" target="_blank">ChatBot</a></noscript>
+    <footer style="text-align: center; padding: 10px; background-color: #f1f1f1;">
+      <p>Developed by Prawin</p>
+    </footer>
   </body>
 </html>
